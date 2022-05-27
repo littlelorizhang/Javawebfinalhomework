@@ -15,6 +15,7 @@ public class ChangePasswordServlet extends HttpServlet {
     JDBCUtils db = new JDBCUtils();
     private static final long serialVersionUID = 1L;
     private static UserDao dao=new UserDao();
+    private static OpearteDao dao2=new OpearteDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -57,6 +58,7 @@ public class ChangePasswordServlet extends HttpServlet {
                 operate.setOtime(time);
                 operate.setOtype("修改登陆口令");
                 operate.setOid(RandomStringUtils.randomNumeric(10));
+                boolean c=dao2.insert(operate);
                 request.getSession().setAttribute("user",user);
                 request.getSession().setAttribute("message","操作成功");
                 request.getRequestDispatcher("/managers/index3.jsp").forward(request,response);
