@@ -16,6 +16,7 @@ public class AddEmployeeServlet extends HttpServlet {
     JDBCUtils db = new JDBCUtils();
     private static final long serialVersionUID = 1L;
     private static UserDao dao=new UserDao();
+    private static OperateDao dao2=new OperateDao();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -58,6 +59,7 @@ public class AddEmployeeServlet extends HttpServlet {
                 operate.setOtime(time);
                 operate.setOtype("增加销售人员");
                 operate.setOid(RandomStringUtils.randomNumeric(10));
+                boolean c=dao2.insert(operate);
                 request.getSession().setAttribute("user",user);
                 request.getSession().setAttribute("message","操作成功");
                 request.getRequestDispatcher("/managers/index3.jsp").forward(request,response);
